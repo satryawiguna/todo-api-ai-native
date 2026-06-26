@@ -1,0 +1,28 @@
+---
+description: "Code review checklist for PRs"
+globs: ["src/**"]
+alwaysApply: false
+---
+
+# Review Checklist
+
+## Architecture
+- [ ] Controller hanya parse input dan call service
+- [ ] Service berisi business logic
+- [ ] Repository hanya query DB
+- [ ] Error handling centralized
+
+## Code Quality
+- [ ] Tidak ada `any` type
+- [ ] All function memiliki return type
+- [ ] Input validation dengan Zod
+
+## Security
+- [ ] Ownership check ada
+- [ ] Parameterized query digunakan
+- [ ] Sensitive data tidak di-log
+
+## Testing
+- [ ] Service layer punya unit test
+- [ ] Happy path coverage
+- [ ] Error case coverage
