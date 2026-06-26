@@ -1,0 +1,26 @@
+---
+description: "Security rules for API development"
+globs: ["src/**/*.ts"]
+alwaysApply: true
+---
+
+# Security Rules
+
+## Authentication
+- JWT validation di middleware sebelum masuk controller
+- Enforce expiry time: access token 15 menit, refresh token 7 hari
+- Rate limiting di /auth/* endpoints
+
+## Authorization
+- Ownership check di service layer (user hanya akses data miliknya)
+- Jangan rely pada frontend untuk permission
+
+## Password
+- Hash dengan bcrypt, cost factor minimum 12
+- Jangan pernah return password hash dalam response
+- Jangan log password
+
+## Data Protection
+- Parameterized query untuk SQL injection prevention
+- Jangan hardcode credentials atau secret key
+- Environment variable untuk semua sensitive config

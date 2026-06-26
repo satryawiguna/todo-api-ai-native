@@ -1,0 +1,22 @@
+---
+description: "Database rules for MySQL"
+globs: ["src/repositories/**", "migrations/**"]
+alwaysApply: false
+---
+
+# Database Rules
+
+## Query Safety
+- Selalu gunakan parameterized query (?)
+- Jangan string concatenation dalam SQL
+- Gunakan ORM / query builder untuk safety
+
+## Performance
+- Tambahkan index untuk kolom yang sering di-filter atau join
+- Hindari N+1 query
+- Gunakan projection (SELECT specific columns) bukan SELECT *
+
+## Data Integrity
+- Soft delete untuk task: UPDATE deleted_at
+- Hard delete tidak diekspos ke API publik
+- Always include created_at dan updated_at timestamp
