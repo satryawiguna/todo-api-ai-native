@@ -7,22 +7,32 @@ alwaysApply: false
 # Review Checklist
 
 ## Architecture
+
 - [ ] Controller hanya parse input dan call service
 - [ ] Service berisi business logic
-- [ ] Repository hanya query DB
-- [ ] Error handling centralized
+- [ ] Repository hanya query DB, soft delete
+- [ ] Error handling centralized, format RFC 7807
+- [ ] AppError digunakan (dari `src/lib/errors.ts`)
 
 ## Code Quality
+
 - [ ] Tidak ada `any` type
 - [ ] All function memiliki return type
 - [ ] Input validation dengan Zod
 
 ## Security
-- [ ] Ownership check ada
+
+- [ ] Ownership check ada di service layer
 - [ ] Parameterized query digunakan
 - [ ] Sensitive data tidak di-log
+- [ ] Password hash tidak pernah di-return
 
 ## Testing
+
 - [ ] Service layer punya unit test
 - [ ] Happy path coverage
 - [ ] Error case coverage
+
+## See Also
+
+- `.github/prompts/review-api.prompt.md` — API review prompt template

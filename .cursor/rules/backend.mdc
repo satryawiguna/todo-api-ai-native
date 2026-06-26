@@ -7,22 +7,38 @@ alwaysApply: true
 # Backend Rules
 
 ## Clean Architecture
+
 - Controller → Service → Repository (strict separation)
 - Controller: HTTP concerns only (parse, call service, respond)
 - Service: business logic dan orchestration antar repo
-- Repository: SQL queries only, parameterized input
+- Repository: SQL queries only, parameterized input, soft delete (`deleted_at`)
 
 ## TypeScript
+
 - Strict mode aktif — tidak ada `any` type
 - Definisikan return type untuk semua function
 - Gunakan interface/type untuk request/response data
 
 ## Input Validation
+
 - Semua input divalidasi dengan Zod di controller layer
 - Throw AppError jika validasi gagal
 - Jangan assume frontend validation
 
 ## Error Handling
-- Throw AppError dari service/repository
+
+- Throw AppError (dari `src/lib/errors.ts`) dari service/repository
 - Centralized error handler middleware catch dan format response
+- Error response: RFC 7807 format (`{ success: false, error: { code, message, details } }`)
 - Jangan expose stack trace di production
+
+## Testing
+
+- Service layer wajib unit test (Vitest)
+- Happy path dan error case coverage
+
+## See Also
+
+- `.github/instructions/endpoint.instructions.md` — controller & route patterns
+- `.github/instructions/service.instructions.md` — service layer patterns
+- `.github/instructions/testing.instructions.md` — testing guidelines
