@@ -1,5 +1,5 @@
 ---
-description: "Gunakan saat menulis entity TypeORM atau migration. Mencakup dekorator, indeks, soft delete."
+description: "Gunakan saat menulis atau mengubah entity TypeORM atau migration. Mencakup dekorator, indeks, soft delete."
 applyTo:
   - "**/*.entity.ts"
   - "**/migrations/**"
@@ -27,3 +27,16 @@ applyTo:
 - `synchronize: true` HANYA untuk development
 - Untuk production: generate migration → review → run
 - Nama migration deskriptif: `CreateTodosTable`, `AddPriorityColumn`
+
+## Best Practice
+- ✅ Tambahkan indeks untuk kolom yang digunakan di `WHERE`, `ORDER BY`, `JOIN`
+- ✅ Gunakan `@Column({ name: 'column_name' })` — eksplisit, tidak bergantung naming strategy
+- ✅ Gunakan soft delete untuk data yang perlu recoverable
+- ✅ Migration harus paired: `up()` DAN `down()` — pastikan bisa rollback
+- ❌ Jangan pakai `synchronize: true` di production — data loss risk
+- ❌ Jangan gunakan tipe `text` tanpa batas panjang — gunakan `varchar` dengan limit
+- ❌ Jangan eager load relasi `@ManyToOne` tanpa alasan performa jelas
+
+## Referensi
+- TypeORM docs: [Entities](https://typeorm.io/entities), [Migrations](https://typeorm.io/migrations)
+- `.github/agents/migration-reviewer.agent.md` — gunakan untuk review migration sebelum production

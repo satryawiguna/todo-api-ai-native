@@ -11,4 +11,4 @@ Langkah-langkah:
 3. Review migration yang dihasilkan — pastikan tidak ada data loss
 4. Jika ada data migration manual, tambahkan ke file migration
 
-Ikuti standar dari `../todo-shared-ai-native-orchestration/standards/` untuk konvensi penamaan.
+Ikuti standar dari MCP server `todo-shared-context` (`standards/`) untuk konvensi penamaan.

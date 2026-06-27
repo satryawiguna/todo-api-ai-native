@@ -1,8 +1,7 @@
 # Todo API — Backend Nest.js
 
 ## Pengetahuan Domain
-Sebelum mengimplementasikan fitur apa pun, baca basis pengetahuan bersama:
-→ `../todo-shared-ai-native-orchestration/`
+Sebelum mengimplementasikan fitur apa pun, baca basis pengetahuan bersama melalui MCP server `todo-shared-context` (GitHub: `satryawiguna/todo-shared-ai-native`):
   - `product/` untuk kebutuhan dan kriteria acceptance
   - `business/` untuk aturan bisnis dan alur kerja
   - `architecture/api-contracts.md` untuk kontrak API (sumber kebenaran)
@@ -33,3 +32,51 @@ Sebelum mengimplementasikan fitur apa pun, baca basis pengetahuan bersama:
 - Unit test untuk service dengan mock repository
 - E2E test dengan Supertest
 - Ikuti konvensi `describe('Nama', () => { it('should ...', () => {}) })`
+
+## Claude Code — Backend Specific
+- Gunakan plan mode untuk perubahan database migration
+- Sebelum mengubah kontrak API, baca `architecture/api-contracts.md` dari MCP server `todo-shared-context`
+- Jalankan `pnpm test` sebelum commit
+
+## Agent yang Tersedia
+Gunakan agent ini via Copilot Chat untuk tugas spesifik:
+
+| Agent | Fungsi | Dipanggil Saat |
+|---|---|---|
+| `api-reviewer` | Review keamanan & kepatuhan kontrak API | Review PR backend |
+| `code-reviewer` | Review kualitas kode (clean code, DRY, SOLID) | Review PR secara umum |
+| `migration-reviewer` | Review keamanan data migration TypeORM | Sebelum migration ke production |
+| `test-reviewer` | Review kualitas test (coverage, edge cases) | Review file test |
+| `security-auditor` | Audit OWASP, dependency, secrets | Review PR atau sebelum deployment |
+
+## Prompt yang Tersedia
+Gunakan prompt via `/` di Copilot Chat:
+
+| Prompt | Fungsi |
+|---|---|
+| `api-endpoint` | Buat endpoint API baru lengkap (DTO, service, controller, test) |
+| `create-migration` | Buat migration TypeORM berdasarkan perubahan entity |
+| `refactor-module` | Refactor module atau service untuk meningkatkan struktur |
+
+## Struktur AI Context
+```
+.github/
+├── instructions/      # Always-on rules via applyTo patterns
+│   ├── nestjs.instructions.md
+│   ├── typeorm.instructions.md
+│   ├── testing.instructions.md
+│   ├── dto.instructions.md
+│   ├── guard.instructions.md
+│   ├── filter.instructions.md
+│   └── interceptor.instructions.md
+├── agents/            # Specialized sub-agents
+│   ├── api-reviewer.agent.md
+│   ├── code-reviewer.agent.md
+│   ├── migration-reviewer.agent.md
+│   ├── test-reviewer.agent.md
+│   └── security-auditor.agent.md
+└── prompts/           # Task templates (slash commands)
+    ├── api-endpoint.prompt.md
+    ├── create-migration.prompt.md
+    └── refactor-module.prompt.md
+```

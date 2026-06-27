@@ -3,10 +3,10 @@ description: "Buat endpoint API baru sesuai kontrak api-contracts.md"
 agent: "craft"
 ---
 
-Buat endpoint API baru untuk: **$ARGUMENTS**
+Buat endpoint API baru untuk: **{{ARGUMENTS}}**
 
 Langkah-langkah:
-1. Baca `../todo-shared-ai-native-orchestration/architecture/api-contracts.md` untuk kontrak API
+1. Baca `architecture/api-contracts.md` dari MCP server `todo-shared-context` untuk kontrak API
 2. Buat/tambah DTO di `src/<module>/dto/` dengan class-validator
 3. Tambah method di service — implementasi business logic
 4. Tambah endpoint di controller dengan Swagger decorators

@@ -1,0 +1,11 @@
+{
+  "hooks": [
+    {
+      "event": "PreToolUse",
+      "tool": "execute_command",
+      "match": "git commit",
+      "command": "pnpm lint && pnpm test",
+      "description": "Pastikan lint dan test pass sebelum commit via AI"
+    }
+  ]
+}

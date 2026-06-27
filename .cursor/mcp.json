@@ -1,0 +1,17 @@
+{
+	"servers": {
+		"todo-shared-context": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-github"
+			],
+			"env": {
+				"GITHUB_PERSONAL_ACCESS_TOKEN": "${env:GITHUB_TOKEN}",
+				"GITHUB_REPOSITORY": "satryawiguna/todo-shared-ai-native"
+			}
+		}
+	},
+	"inputs": []
+}

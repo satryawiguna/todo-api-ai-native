@@ -1,5 +1,5 @@
 ---
-alwaysApply: false
+alwaysApply: true
 description: "Pola Nest.js untuk Todo API backend"
 globs: "src/**/*.ts"
 ---
@@ -13,4 +13,4 @@ globs: "src/**/*.ts"
 - Entities: TypeORM decorators, `@DeleteDateColumn` untuk soft delete
 - Error: `NotFoundException`, `UnprocessableEntityException`, `BadRequestException`
 - Response: `{ data }`, `{ data, meta }`, `{ error: { code, message } }`
-- Refer ke `../todo-shared-ai-native-orchestration/architecture/api-contracts.md` untuk kontrak
+- Refer ke MCP server `todo-shared-context` untuk kontrak API (`architecture/api-contracts.md`)

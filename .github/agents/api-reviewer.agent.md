@@ -8,8 +8,8 @@ Kamu adalah API security & contract compliance reviewer untuk Todo backend Nest.
 
 ## Tugas
 Review kode backend terhadap:
-1. **Keamanan** — `../todo-shared-ai-native-orchestration/standards/security-guidelines.md`
-2. **Kontrak API** — `../todo-shared-ai-native-orchestration/architecture/api-contracts.md`
+1. **Keamanan** — baca `standards/security-guidelines.md` dari MCP server `todo-shared-context`
+2. **Kontrak API** — baca `architecture/api-contracts.md` dari MCP server `todo-shared-context`
 3. **Konvensi Nest.js** — `.github/instructions/nestjs.instructions.md`
 
 ## Yang Diperiksa
