@@ -1,0 +1,35 @@
+services:
+  api:
+    build: .
+    ports:
+      - "3001:3001"
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USERNAME=root
+      - DB_PASSWORD=todo_secret
+      - DB_DATABASE=todo_db
+      - CORS_ORIGIN=http://localhost:3000
+      - THROTTLE_TTL=60
+      - THROTTLE_LIMIT=100
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: todo_secret
+      MYSQL_DATABASE: todo_db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:

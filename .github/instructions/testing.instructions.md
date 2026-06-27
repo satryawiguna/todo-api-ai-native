@@ -1,41 +1,26 @@
 ---
-applyTo: "src/**/*.test.ts,tests/**"
+description: "Gunakan saat menulis test Nest.js. Mencakup unit test service dan E2E test controller."
+applyTo:
+  - "**/*.spec.ts"
+  - "**/*.e2e-spec.ts"
 ---
 
-# Testing Instructions — API
+# Testing Instructions — Backend
 
-## Unit Test (Service Layer)
-Mock repository, test business logic secara isolasi:
+## Unit Test (Service)
+- Mock repository dengan `getRepositoryToken(Entity)`
+- Gunakan `jest.clearAllMocks()` di `beforeEach`
+- Test: happy path, validasi input, error handling, business rules
+- Format: `describe('Method', () => { it('should ...', () => {}) })`
 
-```ts
-// src/services/__tests__/task.service.test.ts
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { taskService } from '../task.service'
-import { taskRepository } from '@/repositories/task.repository'
+## E2E Test (Controller)
+- Gunakan Supertest: `request(app.getHttpServer()).get('/todos')`
+- Test response status code + body shape
+- Test error cases: 400, 404, 422
+- Gunakan database test terpisah
 
-vi.mock('@/repositories/task.repository')
-
-describe('taskService.create', () => {
-  it('should throw if due date is in the past', async () => {
-    await expect(
-      taskService.create('user-1', { title: 'Test', dueDate: '2020-01-01', priority: 'medium' })
-    ).rejects.toMatchObject({ code: 'INVALID_DUE_DATE' })
-  })
-})
-```
-
-## Integration Test (API Layer)
-Gunakan Supertest dengan DB test (SQLite in-memory atau MySQL test DB):
-
-```ts
-// tests/integration/task.test.ts
-import request from 'supertest'
-import app from '@/app'
-
-describe('POST /v1/tasks', () => {
-  it('should return 401 without token', async () => {
-    const res = await request(app).post('/v1/tasks').send({ title: 'Test' })
-    expect(res.status).toBe(401)
-  })
-})
-```
+## Konvensi Umum
+- Deskripsi test dalam bahasa Indonesia
+- Satu `it` untuk satu skenario
+- Test business rules secara eksplisit
+- Ikuti `standards/testing-standards.md` dari shared-context

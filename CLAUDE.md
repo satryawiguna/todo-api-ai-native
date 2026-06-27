@@ -1,38 +1,6 @@
-# Claude Instructions — Todo API
+@AGENTS.md
 
-Kamu adalah senior backend engineer yang bekerja pada Todo App REST API.
-
-## Project Context
-
-- Backend: Node.js + TypeScript + Express + MySQL
-- Frontend (repo terpisah): Next.js (todo-app-ai-native)
-- Shared context (business rules, API contracts, standards): `../todo-shared-ai-native/`
-- AppError class: `src/lib/errors.ts`
-
-## Architecture
-
-Clean Architecture: Controller → Service → Repository
-
-- Controller: HTTP concerns only
-- Service: business logic, throw AppError untuk violations
-- Repository: SQL queries only, parameterized queries, soft delete (`deleted_at`)
-
-## Prioritas
-
-1. Security — validasi semua input, jangan expose sensitive data. Error response: RFC 7807 format
-2. Correctness — ikuti business rules di shared-context
-3. Type safety — tidak ada `any`
-4. Test coverage — service layer wajib unit test
-
-## Sebelum Generate Kode
-
-1. Baca `../todo-shared-ai-native/architecture/api-contracts.md` untuk response format
-2. Baca `../todo-shared-ai-native/business/business-rules.md` untuk validasi
-3. Baca `.github/copilot-instructions.md` untuk architecture rules
-4. Baca `.github/instructions/` untuk pattern spesifik per layer (endpoint, service, repository, testing)
-
-## Common Tasks
-
-- **Endpoint baru**: ikuti `.github/prompts/create-endpoint.prompt.md`
-- **Migration baru**: ikuti `.github/prompts/create-migration.prompt.md`
-- **Security review**: ikuti `.github/prompts/security-review.prompt.md`
+## Claude Code — Backend Specific
+- Gunakan plan mode untuk perubahan database migration
+- Sebelum mengubah kontrak API, baca `../todo-shared-ai-native-orchestration/architecture/api-contracts.md`
+- Jalankan `pnpm test` sebelum commit

@@ -1,27 +1,35 @@
-# Agent Instructions — Todo API
+# Todo API — Backend Nest.js
 
-## Project Overview
-Todo App REST API. Node.js + TypeScript + Express + MySQL. Clean Architecture.
+## Pengetahuan Domain
+Sebelum mengimplementasikan fitur apa pun, baca basis pengetahuan bersama:
+→ `../todo-shared-ai-native-orchestration/`
+  - `product/` untuk kebutuhan dan kriteria acceptance
+  - `business/` untuk aturan bisnis dan alur kerja
+  - `architecture/api-contracts.md` untuk kontrak API (sumber kebenaran)
+  - `standards/` untuk konvensi coding, penamaan, keamanan, pengujian
 
-## Key Files to Read First
-1. `.github/copilot-instructions.md` — architecture dan coding rules
-2. `../todo-shared-ai-native/architecture/api-contracts.md` — API response format
-3. `../todo-shared-ai-native/business/business-rules.md` — business rules
-4. `src/lib/errors.ts` — AppError class
-5. `src/middlewares/` — auth dan error handler
+## Konvensi Nest.js
+- Modul mengenkapsulasi area fitur (todos/, users/, notifications/)
+- Service berisi logika bisnis; controller menangani HTTP
+- Semua DTO menggunakan dekorator class-validator
+- ValidationPipe global dengan whitelist + forbidNonWhitelisted
+- Gunakan dekorator @nestjs/swagger di semua endpoint
+- Pola Repository via TypeORM (inject @InjectRepository)
+- Exception kustom extends HttpException
 
-## Layer Rules (singkat)
-- Controller → hanya HTTP: parse, call service, respond
-- Service → business logic: validasi rules, orchestrate repository
-- Repository → SQL only: parameterized query, soft delete
+## Pola TypeORM
+- Entity menggunakan dekorator class + field
+- Gunakan `@CreateDateColumn`, `@UpdateDateColumn`, `@DeleteDateColumn` untuk timestamp
+- `synchronize: true` HANYA untuk development — gunakan migrasi untuk production
+- Nama tabel: plural snake_case (`todos`, `users`)
 
-## Common Tasks
-- **Endpoint baru**: ikuti `.github/prompts/create-endpoint.prompt.md`
-- **Migration baru**: ikuti `.github/prompts/create-migration.prompt.md`
-- **Security review**: ikuti `.github/prompts/security-review.prompt.md`
+## Error Handling
+- 400 — VALIDATION_ERROR (class-validator gagal)
+- 404 — NOT_FOUND (entity tidak ditemukan)
+- 422 — BUSINESS_RULE_VIOLATION (aturan bisnis dilanggar, misal: edit todo completed)
+- 500 — INTERNAL_ERROR (error tidak terduga — jangan tampilkan detail di production)
 
-## Never Do
-- Jangan query DB dari controller atau service
-- Jangan return data user lain (enforce ownership di service layer)
-- Jangan expose stack trace di response
-- Jangan gunakan `any` type
+## Testing
+- Unit test untuk service dengan mock repository
+- E2E test dengan Supertest
+- Ikuti konvensi `describe('Nama', () => { it('should ...', () => {}) })`

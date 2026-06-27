@@ -1,0 +1,14 @@
+# Todo API — Windsurf Rules
+
+Backend Nest.js untuk aplikasi Todo.
+
+## Konvensi
+- Modul mengenkapsulasi fitur (todos/, users/)
+- Semua endpoint memiliki validasi class-validator
+- Response format mengikuti `../todo-shared-ai-native-orchestration/architecture/api-contracts.md`
+- Error handling: 400 (validation), 404 (not found), 422 (business rule), 500 (internal)
+
+## Referensi
+- Domain knowledge: `../todo-shared-ai-native-orchestration/`
+- API contracts: `../todo-shared-ai-native-orchestration/architecture/api-contracts.md`
+- Business rules: `../todo-shared-ai-native-orchestration/business/business-rules.md`

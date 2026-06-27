@@ -1,17 +1,14 @@
 ---
-mode: agent
-tools: [codebase]
-description: "Generate a database migration file"
+description: "Buat migration TypeORM berdasarkan perubahan entity"
+agent: "craft"
 ---
 
-Buat migration untuk: **[DESKRIPSI PERUBAHAN SKEMA]**
+Buat migration TypeORM untuk perubahan entity terbaru.
 
-Ketentuan:
-- Format filename: `YYYYMMDDHHMMSS_[deskripsi_singkat].sql`
-- Sertakan `UP` migration (perubahan) dan `DOWN` migration (rollback)
-- Gunakan `IF NOT EXISTS` / `IF EXISTS` untuk safety
-- Tambahkan index yang relevan sesuai query pattern
-- Soft delete: selalu sertakan kolom `deleted_at TIMESTAMP NULL`
-- Timestamps: selalu sertakan `created_at` dan `updated_at`
+Langkah-langkah:
+1. Baca entity yang berubah di `src/**/**.entity.ts`
+2. Generate migration dengan: `pnpm migration:generate src/database/migrations/<NamaMigration>`
+3. Review migration yang dihasilkan — pastikan tidak ada data loss
+4. Jika ada data migration manual, tambahkan ke file migration
 
-Referensi entities di: `../todo-shared-ai-native/` (jika ada ERD atau entities doc)
+Ikuti standar dari `../todo-shared-ai-native-orchestration/standards/` untuk konvensi penamaan.

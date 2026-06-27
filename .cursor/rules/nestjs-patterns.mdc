@@ -1,0 +1,16 @@
+---
+alwaysApply: false
+description: "Pola Nest.js untuk Todo API backend"
+globs: "src/**/*.ts"
+---
+
+# Nest.js Patterns
+
+- Modules: `*Module` di root folder fitur
+- Controllers: `@Controller('route')` — delegasikan ke service
+- Services: business logic, inject repository dengan `@InjectRepository`
+- DTOs: class-validator decorators, `@ApiProperty` untuk Swagger
+- Entities: TypeORM decorators, `@DeleteDateColumn` untuk soft delete
+- Error: `NotFoundException`, `UnprocessableEntityException`, `BadRequestException`
+- Response: `{ data }`, `{ data, meta }`, `{ error: { code, message } }`
+- Refer ke `../todo-shared-ai-native-orchestration/architecture/api-contracts.md` untuk kontrak
