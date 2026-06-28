@@ -9,7 +9,8 @@ async function bootstrap() {
 
   // Security
   app.use(helmet());
-  app.enableCors({ origin: process.env.CORS_ORIGIN || 'http://localhost:3000' });
+  const corsOrigins = process.env.CORS_ORIGINS?.split(',') || ['http://localhost:3000', 'http://localhost:3001'];
+  app.enableCors({ origin: corsOrigins });
 
   // Global validation pipe — matches standards/security-guidelines.md
   app.useGlobalPipes(
@@ -29,7 +30,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document);
 
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 5000;
   await app.listen(port);
   console.log(`🚀 API berjalan di http://localhost:${port}`);
   console.log(`📚 Swagger docs: http://localhost:${port}/api/docs`);

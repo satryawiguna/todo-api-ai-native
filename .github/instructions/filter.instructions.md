@@ -12,6 +12,9 @@ applyTo:
 - Gunakan `@Injectable()` (opsional, tapi direkomendasikan untuk konsistensi)
 
 ## Response Envelope
+- Format success single item: `{ data: { ... } }`
+- Format success list (non-paginated): `{ data: [...] }` — tanpa `meta`, maks 100 item
+- Format success list (paginated): `{ data: [...], meta: { page, limit, total, totalPages } }`
 - Format error response: `{ error: { code: string, message: string, details?: any } }`
 - Jangan bocorkan stack trace ke client di production
 - Gunakan `Logger` untuk mencatat error detail
@@ -21,7 +24,6 @@ applyTo:
 |---|---|---|
 | 400 | `VALIDATION_ERROR` | class-validator gagal |
 | 404 | `NOT_FOUND` | Entity tidak ditemukan |
-| 409 | `CONFLICT` | Duplikasi data |
 | 422 | `BUSINESS_RULE_VIOLATION` | Aturan bisnis dilanggar |
 | 429 | `RATE_LIMIT_EXCEEDED` | Throttle limit |
 | 500 | `INTERNAL_ERROR` | Error tidak terduga |
